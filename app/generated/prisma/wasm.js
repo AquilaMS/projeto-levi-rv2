@@ -163,6 +163,68 @@ exports.Prisma.VerificationScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AllowedUserScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TransactionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  value: 'value',
+  paymentDate: 'paymentDate',
+  movement: 'movement',
+  observation: 'observation',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  fundId: 'fundId',
+  userId: 'userId'
+};
+
+exports.Prisma.FundScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  monthPercentage: 'monthPercentage',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MemberScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DepartmentScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+};
+
+exports.Prisma.CongregationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+};
+
+exports.Prisma.PermissionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId',
+  congregationId: 'congregationId',
+  deparmentId: 'deparmentId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -172,14 +234,24 @@ exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
-
+exports.MovementType = exports.$Enums.MovementType = {
+  ENTRADA: 'ENTRADA',
+  SAIDA: 'SAIDA'
+};
 
 exports.Prisma.ModelName = {
   Teste: 'Teste',
   User: 'User',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  AllowedUser: 'AllowedUser',
+  Transaction: 'Transaction',
+  Fund: 'Fund',
+  Member: 'Member',
+  Department: 'Department',
+  Congregation: 'Congregation',
+  Permission: 'Permission'
 };
 
 /**

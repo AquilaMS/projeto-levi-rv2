@@ -23,7 +23,7 @@ model Teste {
 }
 
 model User {
-  id            String    @id @map("_id")
+  id            String         @id @map("_id")
   name          String
   email         String
   emailVerified Boolean
@@ -32,6 +32,10 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
+  department    Department[]
+  congregation  Congregation[]
+  permission    Permission[]
+  Transaction   Transaction[]
 
   @@unique([email])
   @@map("user")
@@ -80,4 +84,98 @@ model Verification {
   updatedAt  DateTime?
 
   @@map("verification")
+}
+
+//////////////////////
+model AllowedUser {
+  id    String @id @map("_id")
+  name  String
+  email String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Transaction {
+  id          String       @id @map("_id")
+  name        String
+  value       Float
+  paymentDate DateTime
+  movement    MovementType
+  Fund        Fund?        @relation(fields: [fundId], references: [id])
+  observation String?
+  createdBy   User         @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  fundId String?
+  userId String
+}
+
+model Fund {
+  id              String @id @map("_id")
+  name            String
+  monthPercentage Float
+
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  Transaction Transaction[]
+}
+
+model Member {
+  id        String   @id @map("_id")
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Department {
+  id         String       @id @map("_id")
+  name       String
+  Permission Permission[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
+}
+
+model Congregation {
+  id   String @id @map("_id")
+  name String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User       User?        @relation(fields: [userId], references: [id])
+  userId     String?
+  Permission Permission[]
+}
+
+model Permission {
+  id           String        @id @map("_id")
+  name         String
+  deparment    Department?   @relation(fields: [deparmentId], references: [id])
+  congregation Congregation? @relation(fields: [congregationId], references: [id])
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  User           User?   @relation(fields: [userId], references: [id])
+  userId         String?
+  congregationId String
+  deparmentId    String?
+}
+
+enum Role {
+  ADMINISTRADOR
+  PASTOR
+  LIDER
+  TESOUREIRO
+}
+
+enum MovementType {
+  ENTRADA
+  SAIDA
 }
