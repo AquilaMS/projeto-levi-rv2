@@ -14,5 +14,4 @@ export async function loginWithEmail(formData: FormData) {
             password,
         }
     })
-    console.log(user)
 }
