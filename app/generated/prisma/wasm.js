@@ -189,7 +189,9 @@ exports.Prisma.FundScalarFieldEnum = {
   name: 'name',
   monthPercentage: 'monthPercentage',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  departmentId: 'departmentId',
+  congregationId: 'congregationId'
 };
 
 exports.Prisma.MemberScalarFieldEnum = {
