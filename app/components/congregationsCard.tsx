@@ -28,7 +28,6 @@ export function CongregationCard({ congregation }: { congregation: Congregation 
                     <ModalBody>
                         <CongregationForm congregation={congregation} />
                     </ModalBody>
-
                 </ModalContent>
             </Modal>
         </>

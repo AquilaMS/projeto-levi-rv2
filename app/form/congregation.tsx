@@ -2,7 +2,7 @@
 
 import { addToast, Button, Form, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@heroui/react";
 import { useEffect, useState } from "react";
-import { setCongregation } from "../congregation/actions";
+import { deleteCongregation, setCongregation } from "../congregation/actions";
 import { Congregation } from "../generated/prisma";
 
 export default function CongregationForm({ congregation }: { congregation?: Congregation }) {
@@ -22,7 +22,21 @@ export default function CongregationForm({ congregation }: { congregation?: Cong
         }).finally(() => {
             setIsLoading(false);
         })
-    };
+    }
+
+    const handleDelete = () => {
+        setIsLoading(true)
+        confirmDeleteModal.onClose()
+        if (!congregation?.id) return
+        deleteCongregation(congregation.id).finally(() => {
+            setIsLoading(false)
+            addToast({ title: 'Congregação excluída com sucesso', color: 'success' });
+        }).catch((error) => {
+            addToast({ title: error.message, color: 'danger' });
+        }).finally(() => {
+            setIsLoading(false);
+        })
+    }
 
     return (<>
         <Form onSubmit={handleSubmit} className="flex flex-col gap-4 justify-end items-end w-full">
@@ -43,7 +57,7 @@ export default function CongregationForm({ congregation }: { congregation?: Cong
                 </ModalBody>
                 <ModalFooter>
                     <Button variant="light" onPress={confirmDeleteModal.onClose}>Cancelar</Button>
-                    <Button color="danger" onPress={() => { }}>Excluir</Button>
+                    <Button color="danger" onPress={handleDelete}>Excluir</Button>
                 </ModalFooter>
             </ModalContent>
         </Modal>

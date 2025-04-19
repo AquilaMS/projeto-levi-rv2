@@ -53,3 +53,17 @@ export async function setCongregation(formData: FormData) {
     revalidatePath("/congregation")
     return true
 }
+
+export async function deleteCongregation(congregationId: string) {
+
+    await getUser()
+
+    const congregation = await prisma.congregation.delete({
+        where: {
+            id: congregationId,
+        }
+    });
+
+    revalidatePath("/congregation")
+    return congregation;
+}
