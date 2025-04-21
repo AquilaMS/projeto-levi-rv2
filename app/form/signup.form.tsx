@@ -31,7 +31,6 @@ export default function SignupForm() {
     }
     return (
         <Form onSubmit={handleSubmit}>
-            <Input isRequired type="text" label='Nome' name="name"></Input>
             <Input isRequired type="email" label='Email' name="email"></Input>
             <Input isRequired type="password" label='Senha' name="password"></Input>
             <div className="flex flex-row w-full gap-4">

@@ -5,24 +5,13 @@ import { prisma } from "../prisma";
 import { revalidatePath } from "next/cache";
 
 export async function getDepartments() {
-
     const user = await getUser();
 
-    const departments = await prisma.department.findMany({
-        where: {
-            Fund: {
-                every: {
-                    department: {
-                        Permission: {
-                            every: {
-                                userId: user?.id,
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    });
+    if (!user) {
+        return [];
+    }
+
+    const departments = await prisma.department.findMany();
 
     return departments;
 }

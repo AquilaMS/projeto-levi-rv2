@@ -189,9 +189,7 @@ exports.Prisma.FundScalarFieldEnum = {
   name: 'name',
   monthPercentage: 'monthPercentage',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  departmentId: 'departmentId',
-  congregationId: 'congregationId'
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.MemberScalarFieldEnum = {
@@ -206,7 +204,8 @@ exports.Prisma.DepartmentScalarFieldEnum = {
   name: 'name',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  userId: 'userId'
+  userId: 'userId',
+  fundId: 'fundId'
 };
 
 exports.Prisma.CongregationScalarFieldEnum = {
@@ -214,12 +213,13 @@ exports.Prisma.CongregationScalarFieldEnum = {
   name: 'name',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  userId: 'userId'
+  userId: 'userId',
+  fundId: 'fundId'
 };
 
 exports.Prisma.PermissionScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  role: 'role',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId',
@@ -239,6 +239,15 @@ exports.Prisma.QueryMode = {
 exports.MovementType = exports.$Enums.MovementType = {
   ENTRADA: 'ENTRADA',
   SAIDA: 'SAIDA'
+};
+
+exports.Role = exports.$Enums.Role = {
+  ADMINISTRADOR: 'ADMINISTRADOR',
+  PASTOR: 'PASTOR',
+  LIDER: 'LIDER',
+  TESOUREIRO: 'TESOUREIRO',
+  ADMIN: 'ADMIN',
+  none: 'none'
 };
 
 exports.Prisma.ModelName = {

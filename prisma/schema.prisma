@@ -114,21 +114,19 @@ model Transaction {
 }
 
 model Fund {
-  id              String       @id @map("_id")
+  id              String         @id @default(uuid()) @map("_id")
   name            String
   monthPercentage Float
-  department      Department   @relation(fields: [departmentId], references: [id])
-  congregation    Congregation @relation(fields: [congregationId], references: [id])
+  department      Department[]
+  congregation    Congregation[]
+  Transaction     Transaction[]
 
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-  Transaction    Transaction[]
-  departmentId   String
-  congregationId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Member {
-  id        String   @id @map("_id")
+  id        String   @id @default(uuid()) @map("_id")
   name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -144,7 +142,8 @@ model Department {
 
   User   User?   @relation(fields: [userId], references: [id])
   userId String?
-  Fund   Fund[]
+  Fund   Fund?   @relation(fields: [fundId], references: [id])
+  fundId String?
 }
 
 model Congregation {
@@ -157,20 +156,21 @@ model Congregation {
   User       User?        @relation(fields: [userId], references: [id])
   userId     String?
   Permission Permission[]
-  Fund       Fund[]
+  Fund       Fund?        @relation(fields: [fundId], references: [id])
+  fundId     String?
 }
 
 model Permission {
-  id           String        @id @map("_id")
-  name         String
-  deparment    Department?   @relation(fields: [deparmentId], references: [id])
+  id           String        @id @default(uuid()) @map("_id")
+  role         Role          @default(none)
+  department   Department?   @relation(fields: [deparmentId], references: [id])
   congregation Congregation? @relation(fields: [congregationId], references: [id])
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
 
   User           User?   @relation(fields: [userId], references: [id])
   userId         String?
-  congregationId String
+  congregationId String?
   deparmentId    String?
 }
 
@@ -179,6 +179,8 @@ enum Role {
   PASTOR
   LIDER
   TESOUREIRO
+  ADMIN
+  none
 }
 
 enum MovementType {
