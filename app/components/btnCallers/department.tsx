@@ -1,12 +1,23 @@
 'use client'
 
+import { getCongregations } from "@/app/congregation/actions"
 import DepartmentForm from "@/app/form/department.form"
+import { Congregation } from "@/app/generated/prisma"
 import { Button } from "@heroui/button"
 import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@heroui/react"
+
+import { useEffect, useState } from "react"
 
 export default function DepartmentCallerBtn() {
 
     const addModal = useDisclosure()
+    const [congregations, setCongregations] = useState<Congregation[]>([])
+
+    useEffect(() => {
+        getCongregations().then((congs) => {
+            setCongregations(congs)
+        })
+    }, [])
 
     return (
         <>
@@ -16,7 +27,7 @@ export default function DepartmentCallerBtn() {
                 <ModalContent>
                     <ModalHeader>Adicionar Departamento</ModalHeader>
                     <ModalBody>
-                        <DepartmentForm onClose={addModal.onClose} />
+                        <DepartmentForm onClose={addModal.onClose} congregations={congregations} />
                     </ModalBody>
                 </ModalContent>
             </Modal>

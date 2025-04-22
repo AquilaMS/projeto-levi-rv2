@@ -2,14 +2,20 @@
 
 import { Button } from "@heroui/button";
 import { Input } from "@heroui/input";
-import { addToast, Form } from "@heroui/react";
-import { useState } from "react";
-import { Department } from "../generated/prisma";
-import { addDepartment, updateDepartment } from "../department/actions";
+import { addToast, Form, Select, SelectItem } from "@heroui/react";
+import { useEffect, useState } from "react";
+import { Congregation, Department } from "../generated/prisma";
+import { addDepartment, deleteDepartment, updateDepartment } from "../department/actions";
 
-export default function DepartmentForm({ department, onClose }: { department?: Department, onClose: () => void }) {
+export default function DepartmentForm({ department, onClose, congregations }: { department?: Department, onClose: () => void, congregations: Congregation[] }) {
 
     const [isLoading, setIsLoading] = useState(false);
+
+    const [allCongregations, setAllCongregations] = useState<Congregation[]>(congregations || []);
+
+    useEffect(() => {
+        setAllCongregations(congregations || [])
+    }, [])
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 
@@ -17,6 +23,7 @@ export default function DepartmentForm({ department, onClose }: { department?: D
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget);
+        formData.append('congregationId', formData.get('congregationId') as string);
 
         if (!department)
             addDepartment(formData).then(() => {
@@ -39,11 +46,37 @@ export default function DepartmentForm({ department, onClose }: { department?: D
             });
     }
 
+    const handlerDelete = () => {
+        if (!department) return;
+        setIsLoading(true);
+        deleteDepartment(department.id).then(() => {
+            addToast({ title: 'Departamento excluído com sucesso', color: 'success' });
+            onClose()
+        }).catch((error) => {
+            addToast({ title: error.message, color: 'danger' });
+        }).finally(() => {
+            setIsLoading(false);
+        });
+    }
+
     return <>
         <Form onSubmit={handleSubmit}>
             <Input type="hidden" name="id" value={department ? department.id : ''}></Input>
-            <Input name="name" label="Nome" defaultValue={department ? department.name : ''} />
-            <div className="flex justify-end w-full">
+            <Input name="name" label="Nome" defaultValue={department ? department.name : ''} required />
+            <Select
+                name="congregationId"
+                label="Congregação"
+                defaultSelectedKeys={department ? [department.congregationId] : []}
+                required
+            >
+                {allCongregations.map((congregation) => (
+                    <SelectItem key={congregation.id}>
+                        {congregation.name}
+                    </SelectItem>
+                ))}
+            </Select>
+            <div className="flex justify-end w-full gap-4">
+                <Button color="danger" variant="light" onPress={handlerDelete}>excluir</Button>
                 <Button isLoading={isLoading} color="primary" type="submit">
                     {department ? 'Atualizar' : 'Adicionar'}
                 </Button>

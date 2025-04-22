@@ -1,11 +1,11 @@
 'use client'
 
 import { Button, Card, CardBody, CardHeader, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@heroui/react"
-import { Department } from "../generated/prisma"
+import { Congregation, Department } from "../generated/prisma"
 import { MdEdit } from "react-icons/md"
 import DepartmentForm from "../form/department.form"
 
-export default function DepartmentCard({ department }: { department: Department }) {
+export default function DepartmentCard({ department, congregations }: { department: Department, congregations: Congregation[] }) {
     
     const modal = useDisclosure()
     
@@ -26,7 +26,7 @@ export default function DepartmentCard({ department }: { department: Department 
                 <ModalContent>
                     <ModalHeader>Editar congregação</ModalHeader>
                     <ModalBody>
-                        <DepartmentForm department={department} onClose={modal.onClose} />
+                        <DepartmentForm department={department} onClose={modal.onClose} congregations={congregations}/>
                     </ModalBody>
                 </ModalContent>
             </Modal>

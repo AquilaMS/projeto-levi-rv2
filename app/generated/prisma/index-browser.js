@@ -205,7 +205,8 @@ exports.Prisma.DepartmentScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId',
-  fundId: 'fundId'
+  fundId: 'fundId',
+  congregationId: 'congregationId'
 };
 
 exports.Prisma.CongregationScalarFieldEnum = {

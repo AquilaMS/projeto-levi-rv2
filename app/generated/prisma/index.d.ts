@@ -2014,10 +2014,12 @@ export namespace Prisma {
 
   export type CongregationCountOutputType = {
     Permission: number
+    Department: number
   }
 
   export type CongregationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Permission?: boolean | CongregationCountOutputTypeCountPermissionArgs
+    Department?: boolean | CongregationCountOutputTypeCountDepartmentArgs
   }
 
   // Custom InputTypes
@@ -2036,6 +2038,13 @@ export namespace Prisma {
    */
   export type CongregationCountOutputTypeCountPermissionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PermissionWhereInput
+  }
+
+  /**
+   * CongregationCountOutputType without action
+   */
+  export type CongregationCountOutputTypeCountDepartmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DepartmentWhereInput
   }
 
 
@@ -11209,6 +11218,7 @@ export namespace Prisma {
     updatedAt: Date | null
     userId: string | null
     fundId: string | null
+    congregationId: string | null
   }
 
   export type DepartmentMaxAggregateOutputType = {
@@ -11218,6 +11228,7 @@ export namespace Prisma {
     updatedAt: Date | null
     userId: string | null
     fundId: string | null
+    congregationId: string | null
   }
 
   export type DepartmentCountAggregateOutputType = {
@@ -11227,6 +11238,7 @@ export namespace Prisma {
     updatedAt: number
     userId: number
     fundId: number
+    congregationId: number
     _all: number
   }
 
@@ -11238,6 +11250,7 @@ export namespace Prisma {
     updatedAt?: true
     userId?: true
     fundId?: true
+    congregationId?: true
   }
 
   export type DepartmentMaxAggregateInputType = {
@@ -11247,6 +11260,7 @@ export namespace Prisma {
     updatedAt?: true
     userId?: true
     fundId?: true
+    congregationId?: true
   }
 
   export type DepartmentCountAggregateInputType = {
@@ -11256,6 +11270,7 @@ export namespace Prisma {
     updatedAt?: true
     userId?: true
     fundId?: true
+    congregationId?: true
     _all?: true
   }
 
@@ -11338,6 +11353,7 @@ export namespace Prisma {
     updatedAt: Date
     userId: string | null
     fundId: string | null
+    congregationId: string
     _count: DepartmentCountAggregateOutputType | null
     _min: DepartmentMinAggregateOutputType | null
     _max: DepartmentMaxAggregateOutputType | null
@@ -11364,7 +11380,9 @@ export namespace Prisma {
     updatedAt?: boolean
     userId?: boolean
     fundId?: boolean
+    congregationId?: boolean
     Permission?: boolean | Department$PermissionArgs<ExtArgs>
+    congregation?: boolean | CongregationDefaultArgs<ExtArgs>
     User?: boolean | Department$UserArgs<ExtArgs>
     Fund?: boolean | Department$FundArgs<ExtArgs>
     _count?: boolean | DepartmentCountOutputTypeDefaultArgs<ExtArgs>
@@ -11379,11 +11397,13 @@ export namespace Prisma {
     updatedAt?: boolean
     userId?: boolean
     fundId?: boolean
+    congregationId?: boolean
   }
 
-  export type DepartmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "userId" | "fundId", ExtArgs["result"]["department"]>
+  export type DepartmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "userId" | "fundId" | "congregationId", ExtArgs["result"]["department"]>
   export type DepartmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Permission?: boolean | Department$PermissionArgs<ExtArgs>
+    congregation?: boolean | CongregationDefaultArgs<ExtArgs>
     User?: boolean | Department$UserArgs<ExtArgs>
     Fund?: boolean | Department$FundArgs<ExtArgs>
     _count?: boolean | DepartmentCountOutputTypeDefaultArgs<ExtArgs>
@@ -11393,6 +11413,7 @@ export namespace Prisma {
     name: "Department"
     objects: {
       Permission: Prisma.$PermissionPayload<ExtArgs>[]
+      congregation: Prisma.$CongregationPayload<ExtArgs>
       User: Prisma.$UserPayload<ExtArgs> | null
       Fund: Prisma.$FundPayload<ExtArgs> | null
     }
@@ -11403,6 +11424,7 @@ export namespace Prisma {
       updatedAt: Date
       userId: string | null
       fundId: string | null
+      congregationId: string
     }, ExtArgs["result"]["department"]>
     composites: {}
   }
@@ -11767,6 +11789,7 @@ export namespace Prisma {
   export interface Prisma__DepartmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     Permission<T extends Department$PermissionArgs<ExtArgs> = {}>(args?: Subset<T, Department$PermissionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    congregation<T extends CongregationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CongregationDefaultArgs<ExtArgs>>): Prisma__CongregationClient<$Result.GetResult<Prisma.$CongregationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     User<T extends Department$UserArgs<ExtArgs> = {}>(args?: Subset<T, Department$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     Fund<T extends Department$FundArgs<ExtArgs> = {}>(args?: Subset<T, Department$FundArgs<ExtArgs>>): Prisma__FundClient<$Result.GetResult<Prisma.$FundPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
@@ -11804,6 +11827,7 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"Department", 'DateTime'>
     readonly userId: FieldRef<"Department", 'String'>
     readonly fundId: FieldRef<"Department", 'String'>
+    readonly congregationId: FieldRef<"Department", 'String'>
   }
     
 
@@ -12429,6 +12453,7 @@ export namespace Prisma {
     User?: boolean | Congregation$UserArgs<ExtArgs>
     Permission?: boolean | Congregation$PermissionArgs<ExtArgs>
     Fund?: boolean | Congregation$FundArgs<ExtArgs>
+    Department?: boolean | Congregation$DepartmentArgs<ExtArgs>
     _count?: boolean | CongregationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["congregation"]>
 
@@ -12448,6 +12473,7 @@ export namespace Prisma {
     User?: boolean | Congregation$UserArgs<ExtArgs>
     Permission?: boolean | Congregation$PermissionArgs<ExtArgs>
     Fund?: boolean | Congregation$FundArgs<ExtArgs>
+    Department?: boolean | Congregation$DepartmentArgs<ExtArgs>
     _count?: boolean | CongregationCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -12457,6 +12483,7 @@ export namespace Prisma {
       User: Prisma.$UserPayload<ExtArgs> | null
       Permission: Prisma.$PermissionPayload<ExtArgs>[]
       Fund: Prisma.$FundPayload<ExtArgs> | null
+      Department: Prisma.$DepartmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -12831,6 +12858,7 @@ export namespace Prisma {
     User<T extends Congregation$UserArgs<ExtArgs> = {}>(args?: Subset<T, Congregation$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     Permission<T extends Congregation$PermissionArgs<ExtArgs> = {}>(args?: Subset<T, Congregation$PermissionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Fund<T extends Congregation$FundArgs<ExtArgs> = {}>(args?: Subset<T, Congregation$FundArgs<ExtArgs>>): Prisma__FundClient<$Result.GetResult<Prisma.$FundPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Department<T extends Congregation$DepartmentArgs<ExtArgs> = {}>(args?: Subset<T, Congregation$DepartmentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13295,6 +13323,30 @@ export namespace Prisma {
      */
     include?: FundInclude<ExtArgs> | null
     where?: FundWhereInput
+  }
+
+  /**
+   * Congregation.Department
+   */
+  export type Congregation$DepartmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    where?: DepartmentWhereInput
+    orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
+    cursor?: DepartmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DepartmentScalarFieldEnum | DepartmentScalarFieldEnum[]
   }
 
   /**
@@ -14508,7 +14560,8 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     userId: 'userId',
-    fundId: 'fundId'
+    fundId: 'fundId',
+    congregationId: 'congregationId'
   };
 
   export type DepartmentScalarFieldEnum = (typeof DepartmentScalarFieldEnum)[keyof typeof DepartmentScalarFieldEnum]
@@ -15260,7 +15313,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Department"> | Date | string
     userId?: StringNullableFilter<"Department"> | string | null
     fundId?: StringNullableFilter<"Department"> | string | null
+    congregationId?: StringFilter<"Department"> | string
     Permission?: PermissionListRelationFilter
+    congregation?: XOR<CongregationScalarRelationFilter, CongregationWhereInput>
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     Fund?: XOR<FundNullableScalarRelationFilter, FundWhereInput> | null
   }
@@ -15272,7 +15327,9 @@ export namespace Prisma {
     updatedAt?: SortOrder
     userId?: SortOrder
     fundId?: SortOrder
+    congregationId?: SortOrder
     Permission?: PermissionOrderByRelationAggregateInput
+    congregation?: CongregationOrderByWithRelationInput
     User?: UserOrderByWithRelationInput
     Fund?: FundOrderByWithRelationInput
   }
@@ -15287,7 +15344,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Department"> | Date | string
     userId?: StringNullableFilter<"Department"> | string | null
     fundId?: StringNullableFilter<"Department"> | string | null
+    congregationId?: StringFilter<"Department"> | string
     Permission?: PermissionListRelationFilter
+    congregation?: XOR<CongregationScalarRelationFilter, CongregationWhereInput>
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     Fund?: XOR<FundNullableScalarRelationFilter, FundWhereInput> | null
   }, "id">
@@ -15299,6 +15358,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     userId?: SortOrder
     fundId?: SortOrder
+    congregationId?: SortOrder
     _count?: DepartmentCountOrderByAggregateInput
     _max?: DepartmentMaxOrderByAggregateInput
     _min?: DepartmentMinOrderByAggregateInput
@@ -15314,6 +15374,7 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Department"> | Date | string
     userId?: StringNullableWithAggregatesFilter<"Department"> | string | null
     fundId?: StringNullableWithAggregatesFilter<"Department"> | string | null
+    congregationId?: StringWithAggregatesFilter<"Department"> | string
   }
 
   export type CongregationWhereInput = {
@@ -15329,6 +15390,7 @@ export namespace Prisma {
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     Permission?: PermissionListRelationFilter
     Fund?: XOR<FundNullableScalarRelationFilter, FundWhereInput> | null
+    Department?: DepartmentListRelationFilter
   }
 
   export type CongregationOrderByWithRelationInput = {
@@ -15341,6 +15403,7 @@ export namespace Prisma {
     User?: UserOrderByWithRelationInput
     Permission?: PermissionOrderByRelationAggregateInput
     Fund?: FundOrderByWithRelationInput
+    Department?: DepartmentOrderByRelationAggregateInput
   }
 
   export type CongregationWhereUniqueInput = Prisma.AtLeast<{
@@ -15356,6 +15419,7 @@ export namespace Prisma {
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     Permission?: PermissionListRelationFilter
     Fund?: XOR<FundNullableScalarRelationFilter, FundWhereInput> | null
+    Department?: DepartmentListRelationFilter
   }, "id">
 
   export type CongregationOrderByWithAggregationInput = {
@@ -16078,6 +16142,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Permission?: PermissionCreateNestedManyWithoutDepartmentInput
+    congregation: CongregationCreateNestedOneWithoutDepartmentInput
     User?: UserCreateNestedOneWithoutDepartmentInput
     Fund?: FundCreateNestedOneWithoutDepartmentInput
   }
@@ -16089,6 +16154,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     userId?: string | null
     fundId?: string | null
+    congregationId: string
     Permission?: PermissionUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
@@ -16097,6 +16163,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Permission?: PermissionUpdateManyWithoutDepartmentNestedInput
+    congregation?: CongregationUpdateOneRequiredWithoutDepartmentNestedInput
     User?: UserUpdateOneWithoutDepartmentNestedInput
     Fund?: FundUpdateOneWithoutDepartmentNestedInput
   }
@@ -16107,6 +16174,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     fundId?: NullableStringFieldUpdateOperationsInput | string | null
+    congregationId?: StringFieldUpdateOperationsInput | string
     Permission?: PermissionUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
@@ -16117,6 +16185,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     userId?: string | null
     fundId?: string | null
+    congregationId: string
   }
 
   export type DepartmentUpdateManyMutationInput = {
@@ -16131,6 +16200,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     fundId?: NullableStringFieldUpdateOperationsInput | string | null
+    congregationId?: StringFieldUpdateOperationsInput | string
   }
 
   export type CongregationCreateInput = {
@@ -16141,6 +16211,7 @@ export namespace Prisma {
     User?: UserCreateNestedOneWithoutCongregationInput
     Permission?: PermissionCreateNestedManyWithoutCongregationInput
     Fund?: FundCreateNestedOneWithoutCongregationInput
+    Department?: DepartmentCreateNestedManyWithoutCongregationInput
   }
 
   export type CongregationUncheckedCreateInput = {
@@ -16151,6 +16222,7 @@ export namespace Prisma {
     userId?: string | null
     fundId?: string | null
     Permission?: PermissionUncheckedCreateNestedManyWithoutCongregationInput
+    Department?: DepartmentUncheckedCreateNestedManyWithoutCongregationInput
   }
 
   export type CongregationUpdateInput = {
@@ -16160,6 +16232,7 @@ export namespace Prisma {
     User?: UserUpdateOneWithoutCongregationNestedInput
     Permission?: PermissionUpdateManyWithoutCongregationNestedInput
     Fund?: FundUpdateOneWithoutCongregationNestedInput
+    Department?: DepartmentUpdateManyWithoutCongregationNestedInput
   }
 
   export type CongregationUncheckedUpdateInput = {
@@ -16169,6 +16242,7 @@ export namespace Prisma {
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     fundId?: NullableStringFieldUpdateOperationsInput | string | null
     Permission?: PermissionUncheckedUpdateManyWithoutCongregationNestedInput
+    Department?: DepartmentUncheckedUpdateManyWithoutCongregationNestedInput
   }
 
   export type CongregationCreateManyInput = {
@@ -16787,6 +16861,11 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type CongregationScalarRelationFilter = {
+    is?: CongregationWhereInput
+    isNot?: CongregationWhereInput
+  }
+
   export type UserNullableScalarRelationFilter = {
     is?: UserWhereInput | null
     isNot?: UserWhereInput | null
@@ -16799,6 +16878,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     userId?: SortOrder
     fundId?: SortOrder
+    congregationId?: SortOrder
   }
 
   export type DepartmentMaxOrderByAggregateInput = {
@@ -16808,6 +16888,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     userId?: SortOrder
     fundId?: SortOrder
+    congregationId?: SortOrder
   }
 
   export type DepartmentMinOrderByAggregateInput = {
@@ -16817,6 +16898,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     userId?: SortOrder
     fundId?: SortOrder
+    congregationId?: SortOrder
   }
 
   export type CongregationCountOrderByAggregateInput = {
@@ -17380,6 +17462,12 @@ export namespace Prisma {
     connect?: PermissionWhereUniqueInput | PermissionWhereUniqueInput[]
   }
 
+  export type CongregationCreateNestedOneWithoutDepartmentInput = {
+    create?: XOR<CongregationCreateWithoutDepartmentInput, CongregationUncheckedCreateWithoutDepartmentInput>
+    connectOrCreate?: CongregationCreateOrConnectWithoutDepartmentInput
+    connect?: CongregationWhereUniqueInput
+  }
+
   export type UserCreateNestedOneWithoutDepartmentInput = {
     create?: XOR<UserCreateWithoutDepartmentInput, UserUncheckedCreateWithoutDepartmentInput>
     connectOrCreate?: UserCreateOrConnectWithoutDepartmentInput
@@ -17411,6 +17499,14 @@ export namespace Prisma {
     update?: PermissionUpdateWithWhereUniqueWithoutDepartmentInput | PermissionUpdateWithWhereUniqueWithoutDepartmentInput[]
     updateMany?: PermissionUpdateManyWithWhereWithoutDepartmentInput | PermissionUpdateManyWithWhereWithoutDepartmentInput[]
     deleteMany?: PermissionScalarWhereInput | PermissionScalarWhereInput[]
+  }
+
+  export type CongregationUpdateOneRequiredWithoutDepartmentNestedInput = {
+    create?: XOR<CongregationCreateWithoutDepartmentInput, CongregationUncheckedCreateWithoutDepartmentInput>
+    connectOrCreate?: CongregationCreateOrConnectWithoutDepartmentInput
+    upsert?: CongregationUpsertWithoutDepartmentInput
+    connect?: CongregationWhereUniqueInput
+    update?: XOR<XOR<CongregationUpdateToOneWithWhereWithoutDepartmentInput, CongregationUpdateWithoutDepartmentInput>, CongregationUncheckedUpdateWithoutDepartmentInput>
   }
 
   export type UserUpdateOneWithoutDepartmentNestedInput = {
@@ -17466,11 +17562,25 @@ export namespace Prisma {
     connect?: FundWhereUniqueInput
   }
 
+  export type DepartmentCreateNestedManyWithoutCongregationInput = {
+    create?: XOR<DepartmentCreateWithoutCongregationInput, DepartmentUncheckedCreateWithoutCongregationInput> | DepartmentCreateWithoutCongregationInput[] | DepartmentUncheckedCreateWithoutCongregationInput[]
+    connectOrCreate?: DepartmentCreateOrConnectWithoutCongregationInput | DepartmentCreateOrConnectWithoutCongregationInput[]
+    createMany?: DepartmentCreateManyCongregationInputEnvelope
+    connect?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+  }
+
   export type PermissionUncheckedCreateNestedManyWithoutCongregationInput = {
     create?: XOR<PermissionCreateWithoutCongregationInput, PermissionUncheckedCreateWithoutCongregationInput> | PermissionCreateWithoutCongregationInput[] | PermissionUncheckedCreateWithoutCongregationInput[]
     connectOrCreate?: PermissionCreateOrConnectWithoutCongregationInput | PermissionCreateOrConnectWithoutCongregationInput[]
     createMany?: PermissionCreateManyCongregationInputEnvelope
     connect?: PermissionWhereUniqueInput | PermissionWhereUniqueInput[]
+  }
+
+  export type DepartmentUncheckedCreateNestedManyWithoutCongregationInput = {
+    create?: XOR<DepartmentCreateWithoutCongregationInput, DepartmentUncheckedCreateWithoutCongregationInput> | DepartmentCreateWithoutCongregationInput[] | DepartmentUncheckedCreateWithoutCongregationInput[]
+    connectOrCreate?: DepartmentCreateOrConnectWithoutCongregationInput | DepartmentCreateOrConnectWithoutCongregationInput[]
+    createMany?: DepartmentCreateManyCongregationInputEnvelope
+    connect?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
   }
 
   export type UserUpdateOneWithoutCongregationNestedInput = {
@@ -17507,6 +17617,20 @@ export namespace Prisma {
     update?: XOR<XOR<FundUpdateToOneWithWhereWithoutCongregationInput, FundUpdateWithoutCongregationInput>, FundUncheckedUpdateWithoutCongregationInput>
   }
 
+  export type DepartmentUpdateManyWithoutCongregationNestedInput = {
+    create?: XOR<DepartmentCreateWithoutCongregationInput, DepartmentUncheckedCreateWithoutCongregationInput> | DepartmentCreateWithoutCongregationInput[] | DepartmentUncheckedCreateWithoutCongregationInput[]
+    connectOrCreate?: DepartmentCreateOrConnectWithoutCongregationInput | DepartmentCreateOrConnectWithoutCongregationInput[]
+    upsert?: DepartmentUpsertWithWhereUniqueWithoutCongregationInput | DepartmentUpsertWithWhereUniqueWithoutCongregationInput[]
+    createMany?: DepartmentCreateManyCongregationInputEnvelope
+    set?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    disconnect?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    delete?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    connect?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    update?: DepartmentUpdateWithWhereUniqueWithoutCongregationInput | DepartmentUpdateWithWhereUniqueWithoutCongregationInput[]
+    updateMany?: DepartmentUpdateManyWithWhereWithoutCongregationInput | DepartmentUpdateManyWithWhereWithoutCongregationInput[]
+    deleteMany?: DepartmentScalarWhereInput | DepartmentScalarWhereInput[]
+  }
+
   export type PermissionUncheckedUpdateManyWithoutCongregationNestedInput = {
     create?: XOR<PermissionCreateWithoutCongregationInput, PermissionUncheckedCreateWithoutCongregationInput> | PermissionCreateWithoutCongregationInput[] | PermissionUncheckedCreateWithoutCongregationInput[]
     connectOrCreate?: PermissionCreateOrConnectWithoutCongregationInput | PermissionCreateOrConnectWithoutCongregationInput[]
@@ -17519,6 +17643,20 @@ export namespace Prisma {
     update?: PermissionUpdateWithWhereUniqueWithoutCongregationInput | PermissionUpdateWithWhereUniqueWithoutCongregationInput[]
     updateMany?: PermissionUpdateManyWithWhereWithoutCongregationInput | PermissionUpdateManyWithWhereWithoutCongregationInput[]
     deleteMany?: PermissionScalarWhereInput | PermissionScalarWhereInput[]
+  }
+
+  export type DepartmentUncheckedUpdateManyWithoutCongregationNestedInput = {
+    create?: XOR<DepartmentCreateWithoutCongregationInput, DepartmentUncheckedCreateWithoutCongregationInput> | DepartmentCreateWithoutCongregationInput[] | DepartmentUncheckedCreateWithoutCongregationInput[]
+    connectOrCreate?: DepartmentCreateOrConnectWithoutCongregationInput | DepartmentCreateOrConnectWithoutCongregationInput[]
+    upsert?: DepartmentUpsertWithWhereUniqueWithoutCongregationInput | DepartmentUpsertWithWhereUniqueWithoutCongregationInput[]
+    createMany?: DepartmentCreateManyCongregationInputEnvelope
+    set?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    disconnect?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    delete?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    connect?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    update?: DepartmentUpdateWithWhereUniqueWithoutCongregationInput | DepartmentUpdateWithWhereUniqueWithoutCongregationInput[]
+    updateMany?: DepartmentUpdateManyWithWhereWithoutCongregationInput | DepartmentUpdateManyWithWhereWithoutCongregationInput[]
+    deleteMany?: DepartmentScalarWhereInput | DepartmentScalarWhereInput[]
   }
 
   export type DepartmentCreateNestedOneWithoutPermissionInput = {
@@ -17860,6 +17998,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Permission?: PermissionCreateNestedManyWithoutDepartmentInput
+    congregation: CongregationCreateNestedOneWithoutDepartmentInput
     Fund?: FundCreateNestedOneWithoutDepartmentInput
   }
 
@@ -17869,6 +18008,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     fundId?: string | null
+    congregationId: string
     Permission?: PermissionUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
@@ -17888,6 +18028,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     Permission?: PermissionCreateNestedManyWithoutCongregationInput
     Fund?: FundCreateNestedOneWithoutCongregationInput
+    Department?: DepartmentCreateNestedManyWithoutCongregationInput
   }
 
   export type CongregationUncheckedCreateWithoutUserInput = {
@@ -17897,6 +18038,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     fundId?: string | null
     Permission?: PermissionUncheckedCreateNestedManyWithoutCongregationInput
+    Department?: DepartmentUncheckedCreateNestedManyWithoutCongregationInput
   }
 
   export type CongregationCreateOrConnectWithoutUserInput = {
@@ -18059,6 +18201,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Department"> | Date | string
     userId?: StringNullableFilter<"Department"> | string | null
     fundId?: StringNullableFilter<"Department"> | string | null
+    congregationId?: StringFilter<"Department"> | string
   }
 
   export type CongregationUpsertWithWhereUniqueWithoutUserInput = {
@@ -18432,6 +18575,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Permission?: PermissionCreateNestedManyWithoutDepartmentInput
+    congregation: CongregationCreateNestedOneWithoutDepartmentInput
     User?: UserCreateNestedOneWithoutDepartmentInput
   }
 
@@ -18441,6 +18585,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     userId?: string | null
+    congregationId: string
     Permission?: PermissionUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
@@ -18460,6 +18605,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     User?: UserCreateNestedOneWithoutCongregationInput
     Permission?: PermissionCreateNestedManyWithoutCongregationInput
+    Department?: DepartmentCreateNestedManyWithoutCongregationInput
   }
 
   export type CongregationUncheckedCreateWithoutFundInput = {
@@ -18469,6 +18615,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     userId?: string | null
     Permission?: PermissionUncheckedCreateNestedManyWithoutCongregationInput
+    Department?: DepartmentUncheckedCreateNestedManyWithoutCongregationInput
   }
 
   export type CongregationCreateOrConnectWithoutFundInput = {
@@ -18588,6 +18735,31 @@ export namespace Prisma {
     data: PermissionCreateManyDepartmentInput | PermissionCreateManyDepartmentInput[]
   }
 
+  export type CongregationCreateWithoutDepartmentInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    User?: UserCreateNestedOneWithoutCongregationInput
+    Permission?: PermissionCreateNestedManyWithoutCongregationInput
+    Fund?: FundCreateNestedOneWithoutCongregationInput
+  }
+
+  export type CongregationUncheckedCreateWithoutDepartmentInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId?: string | null
+    fundId?: string | null
+    Permission?: PermissionUncheckedCreateNestedManyWithoutCongregationInput
+  }
+
+  export type CongregationCreateOrConnectWithoutDepartmentInput = {
+    where: CongregationWhereUniqueInput
+    create: XOR<CongregationCreateWithoutDepartmentInput, CongregationUncheckedCreateWithoutDepartmentInput>
+  }
+
   export type UserCreateWithoutDepartmentInput = {
     id: string
     name: string
@@ -18662,6 +18834,35 @@ export namespace Prisma {
   export type PermissionUpdateManyWithWhereWithoutDepartmentInput = {
     where: PermissionScalarWhereInput
     data: XOR<PermissionUpdateManyMutationInput, PermissionUncheckedUpdateManyWithoutDepartmentInput>
+  }
+
+  export type CongregationUpsertWithoutDepartmentInput = {
+    update: XOR<CongregationUpdateWithoutDepartmentInput, CongregationUncheckedUpdateWithoutDepartmentInput>
+    create: XOR<CongregationCreateWithoutDepartmentInput, CongregationUncheckedCreateWithoutDepartmentInput>
+    where?: CongregationWhereInput
+  }
+
+  export type CongregationUpdateToOneWithWhereWithoutDepartmentInput = {
+    where?: CongregationWhereInput
+    data: XOR<CongregationUpdateWithoutDepartmentInput, CongregationUncheckedUpdateWithoutDepartmentInput>
+  }
+
+  export type CongregationUpdateWithoutDepartmentInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    User?: UserUpdateOneWithoutCongregationNestedInput
+    Permission?: PermissionUpdateManyWithoutCongregationNestedInput
+    Fund?: FundUpdateOneWithoutCongregationNestedInput
+  }
+
+  export type CongregationUncheckedUpdateWithoutDepartmentInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    fundId?: NullableStringFieldUpdateOperationsInput | string | null
+    Permission?: PermissionUncheckedUpdateManyWithoutCongregationNestedInput
   }
 
   export type UserUpsertWithoutDepartmentInput = {
@@ -18819,6 +19020,35 @@ export namespace Prisma {
     create: XOR<FundCreateWithoutCongregationInput, FundUncheckedCreateWithoutCongregationInput>
   }
 
+  export type DepartmentCreateWithoutCongregationInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Permission?: PermissionCreateNestedManyWithoutDepartmentInput
+    User?: UserCreateNestedOneWithoutDepartmentInput
+    Fund?: FundCreateNestedOneWithoutDepartmentInput
+  }
+
+  export type DepartmentUncheckedCreateWithoutCongregationInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId?: string | null
+    fundId?: string | null
+    Permission?: PermissionUncheckedCreateNestedManyWithoutDepartmentInput
+  }
+
+  export type DepartmentCreateOrConnectWithoutCongregationInput = {
+    where: DepartmentWhereUniqueInput
+    create: XOR<DepartmentCreateWithoutCongregationInput, DepartmentUncheckedCreateWithoutCongregationInput>
+  }
+
+  export type DepartmentCreateManyCongregationInputEnvelope = {
+    data: DepartmentCreateManyCongregationInput | DepartmentCreateManyCongregationInput[]
+  }
+
   export type UserUpsertWithoutCongregationInput = {
     update: XOR<UserUpdateWithoutCongregationInput, UserUncheckedUpdateWithoutCongregationInput>
     create: XOR<UserCreateWithoutCongregationInput, UserUncheckedCreateWithoutCongregationInput>
@@ -18903,11 +19133,28 @@ export namespace Prisma {
     Transaction?: TransactionUncheckedUpdateManyWithoutFundNestedInput
   }
 
+  export type DepartmentUpsertWithWhereUniqueWithoutCongregationInput = {
+    where: DepartmentWhereUniqueInput
+    update: XOR<DepartmentUpdateWithoutCongregationInput, DepartmentUncheckedUpdateWithoutCongregationInput>
+    create: XOR<DepartmentCreateWithoutCongregationInput, DepartmentUncheckedCreateWithoutCongregationInput>
+  }
+
+  export type DepartmentUpdateWithWhereUniqueWithoutCongregationInput = {
+    where: DepartmentWhereUniqueInput
+    data: XOR<DepartmentUpdateWithoutCongregationInput, DepartmentUncheckedUpdateWithoutCongregationInput>
+  }
+
+  export type DepartmentUpdateManyWithWhereWithoutCongregationInput = {
+    where: DepartmentScalarWhereInput
+    data: XOR<DepartmentUpdateManyMutationInput, DepartmentUncheckedUpdateManyWithoutCongregationInput>
+  }
+
   export type DepartmentCreateWithoutPermissionInput = {
     id?: string
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    congregation: CongregationCreateNestedOneWithoutDepartmentInput
     User?: UserCreateNestedOneWithoutDepartmentInput
     Fund?: FundCreateNestedOneWithoutDepartmentInput
   }
@@ -18919,6 +19166,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     userId?: string | null
     fundId?: string | null
+    congregationId: string
   }
 
   export type DepartmentCreateOrConnectWithoutPermissionInput = {
@@ -18933,6 +19181,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     User?: UserCreateNestedOneWithoutCongregationInput
     Fund?: FundCreateNestedOneWithoutCongregationInput
+    Department?: DepartmentCreateNestedManyWithoutCongregationInput
   }
 
   export type CongregationUncheckedCreateWithoutPermissionInput = {
@@ -18942,6 +19191,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     userId?: string | null
     fundId?: string | null
+    Department?: DepartmentUncheckedCreateNestedManyWithoutCongregationInput
   }
 
   export type CongregationCreateOrConnectWithoutPermissionInput = {
@@ -18999,6 +19249,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    congregation?: CongregationUpdateOneRequiredWithoutDepartmentNestedInput
     User?: UserUpdateOneWithoutDepartmentNestedInput
     Fund?: FundUpdateOneWithoutDepartmentNestedInput
   }
@@ -19009,6 +19260,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     fundId?: NullableStringFieldUpdateOperationsInput | string | null
+    congregationId?: StringFieldUpdateOperationsInput | string
   }
 
   export type CongregationUpsertWithoutPermissionInput = {
@@ -19028,6 +19280,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     User?: UserUpdateOneWithoutCongregationNestedInput
     Fund?: FundUpdateOneWithoutCongregationNestedInput
+    Department?: DepartmentUpdateManyWithoutCongregationNestedInput
   }
 
   export type CongregationUncheckedUpdateWithoutPermissionInput = {
@@ -19036,6 +19289,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     fundId?: NullableStringFieldUpdateOperationsInput | string | null
+    Department?: DepartmentUncheckedUpdateManyWithoutCongregationNestedInput
   }
 
   export type UserUpsertWithoutPermissionInput = {
@@ -19108,6 +19362,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     fundId?: string | null
+    congregationId: string
   }
 
   export type CongregationCreateManyUserInput = {
@@ -19213,6 +19468,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Permission?: PermissionUpdateManyWithoutDepartmentNestedInput
+    congregation?: CongregationUpdateOneRequiredWithoutDepartmentNestedInput
     Fund?: FundUpdateOneWithoutDepartmentNestedInput
   }
 
@@ -19221,6 +19477,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fundId?: NullableStringFieldUpdateOperationsInput | string | null
+    congregationId?: StringFieldUpdateOperationsInput | string
     Permission?: PermissionUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
@@ -19229,6 +19486,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fundId?: NullableStringFieldUpdateOperationsInput | string | null
+    congregationId?: StringFieldUpdateOperationsInput | string
   }
 
   export type CongregationUpdateWithoutUserInput = {
@@ -19237,6 +19495,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Permission?: PermissionUpdateManyWithoutCongregationNestedInput
     Fund?: FundUpdateOneWithoutCongregationNestedInput
+    Department?: DepartmentUpdateManyWithoutCongregationNestedInput
   }
 
   export type CongregationUncheckedUpdateWithoutUserInput = {
@@ -19245,6 +19504,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fundId?: NullableStringFieldUpdateOperationsInput | string | null
     Permission?: PermissionUncheckedUpdateManyWithoutCongregationNestedInput
+    Department?: DepartmentUncheckedUpdateManyWithoutCongregationNestedInput
   }
 
   export type CongregationUncheckedUpdateManyWithoutUserInput = {
@@ -19317,6 +19577,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     userId?: string | null
+    congregationId: string
   }
 
   export type CongregationCreateManyFundInput = {
@@ -19344,6 +19605,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Permission?: PermissionUpdateManyWithoutDepartmentNestedInput
+    congregation?: CongregationUpdateOneRequiredWithoutDepartmentNestedInput
     User?: UserUpdateOneWithoutDepartmentNestedInput
   }
 
@@ -19352,6 +19614,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    congregationId?: StringFieldUpdateOperationsInput | string
     Permission?: PermissionUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
@@ -19360,6 +19623,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+    congregationId?: StringFieldUpdateOperationsInput | string
   }
 
   export type CongregationUpdateWithoutFundInput = {
@@ -19368,6 +19632,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     User?: UserUpdateOneWithoutCongregationNestedInput
     Permission?: PermissionUpdateManyWithoutCongregationNestedInput
+    Department?: DepartmentUpdateManyWithoutCongregationNestedInput
   }
 
   export type CongregationUncheckedUpdateWithoutFundInput = {
@@ -19376,6 +19641,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     Permission?: PermissionUncheckedUpdateManyWithoutCongregationNestedInput
+    Department?: DepartmentUncheckedUpdateManyWithoutCongregationNestedInput
   }
 
   export type CongregationUncheckedUpdateManyWithoutFundInput = {
@@ -19460,6 +19726,15 @@ export namespace Prisma {
     deparmentId?: string | null
   }
 
+  export type DepartmentCreateManyCongregationInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId?: string | null
+    fundId?: string | null
+  }
+
   export type PermissionUpdateWithoutCongregationInput = {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19482,6 +19757,32 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     deparmentId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type DepartmentUpdateWithoutCongregationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Permission?: PermissionUpdateManyWithoutDepartmentNestedInput
+    User?: UserUpdateOneWithoutDepartmentNestedInput
+    Fund?: FundUpdateOneWithoutDepartmentNestedInput
+  }
+
+  export type DepartmentUncheckedUpdateWithoutCongregationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    fundId?: NullableStringFieldUpdateOperationsInput | string | null
+    Permission?: PermissionUncheckedUpdateManyWithoutDepartmentNestedInput
+  }
+
+  export type DepartmentUncheckedUpdateManyWithoutCongregationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    fundId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 
